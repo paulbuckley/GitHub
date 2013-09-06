@@ -57,9 +57,9 @@
 	<icon src="res/icon/webos/miniicon.png" gap:platform="webos" gap:role="mini" />
 	
 	<!-- Splash Screen -->
-	<gap:splash src="splash.png" />
+	<!-- <gap:splash src="splash.png" /> -->
 	
 	<!-- iOS Splash -->	
-	<gap:splash src="res/screen/ios/screen-iphone-portrait-2x.png" gap:platform="ios" width="320" height="480" />
+	<!-- <gap:splash src="res/screen/ios/screen-iphone-portrait-2x.png" gap:platform="ios" width="320" height="480" /> -->
 
 </widget>
