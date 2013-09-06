@@ -42,11 +42,13 @@
 	<!-- retina iPad support: PhoneGap 2.5.0+ only -->
 	<icon src="res/icon/ios/icon-72-2x.png" gap:platform="ios" width="144" height="144" />
 
+
 	<!-- Android -->
 	<icon src="res/icon/android/ldpi.png" gap:platform="android" gap:density="ldpi" />
 	<icon src="res/icon/android/mdpi.png" gap:platform="android" gap:density="mdpi" />
 	<icon src="res/icon/android/hdpi.png" gap:platform="android" gap:density="hdpi" />
 	<icon src="res/icon/android/xhdpi.png" gap:platform="android" gap:density="xhdpi" />
+
 
 	<!-- Blackberry -->
 	<icon src="res/icon/bb/icon.png" gap:platform="blackberry" />
@@ -57,6 +59,7 @@
 	<icon src="res/icon/webos/miniicon.png" gap:platform="webos" gap:role="mini" />
 	
 	<!-- Splash Screen -->
+	
 	<gap:splash src="splash.png" />
 	
 	<!-- iOS Splash -->	
