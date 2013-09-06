@@ -3,7 +3,7 @@
 <html>
 
     <head>
-        <title>Mighty Deals</title>
+        <title>Might Deals</title>
         <meta http-equiv="Content-type" content="text/html; charset=utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,118 @@
       <link rel="stylesheet" type="text/css" href="plugins/css/af.popup.css"  />
       <link rel="stylesheet" type="text/css" href="plugins/css/af.selectBox.css"  />
 
-        
+        <!-- uncomment for AppMobi apps <script type="text/javascript" charset="utf-8" src="http://localhost:58888/_appMobi/appmobi.js"></script>
+<script type="text/javascript" charset="utf-8" src="http://localhost:58888/_appMobi/xhr.js"></script>
+-->
+        <script type="text/javascript" charset="utf-8" src="./appframework.js"></script>
+        <!-- include af.desktopBrowsers.js on desktop browsers only -->
+        <script>
+
+            function loadedPanel(what) {
+                //We are going to set the badge as the number of li elements inside the target
+                $.ui.updateBadge("#aflink", $("#af").find("li").length);
+            }
+
+
+            function unloadedPanel(what) {
+                console.log("unloaded " + what.id);
+            }
+
+            if (!((window.DocumentTouch && document instanceof DocumentTouch) || 'ontouchstart' in window)) {
+                var script = document.createElement("script");
+                script.src = "plugins/af.desktopBrowsers.js";
+                var tag = $("head").append(script);
+            }
+           
+          
+        </script>
+        <script type="text/javascript" charset="utf-8" src="./plugins/af.actionsheet.js"></script>
+         <script type="text/javascript" charset="utf-8" src="./plugins/af.css3animate.js"></script>
+         <script type="text/javascript" charset="utf-8" src="./plugins/af.passwordBox.js"></script>
+          <script type="text/javascript" charset="utf-8" src="./plugins/af.scroller.js"></script>
+           <script type="text/javascript" charset="utf-8" src="./plugins/af.selectBox.js"></script>
+            <script type="text/javascript" charset="utf-8" src="./plugins/af.touchEvents.js"></script>
+          <script type="text/javascript" charset="utf-8" src="./plugins/af.touchLayer.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./plugins/af.popup.js"></script>
+
+        <script type="text/javascript" charset="utf-8" src="./ui/src/appframework.ui.js"></script>
+        <!-- <script type="text/javascript" charset="utf-8" src="./ui/transitions/all.js"></script> -->
+        <script type="text/javascript" charset="utf-8" src="./ui/transitions/fade.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./ui/transitions/flip.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./ui/transitions/pop.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./ui/transitions/slide.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./ui/transitions/slideDown.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./ui/transitions/slideUp.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./plugins/af.slidemenu.js"></script>
+
+        <script type="text/javascript">
+            /* This function runs once the page is loaded, but appMobi is not yet active */
+            //$.ui.animateHeaders=false;
+             var search=document.location.search.toLowerCase().replace("?","");
+             //if(!search)
+                //$.os.useOSThemes=false;
+                
+            if(search) //Android fix has too many buggy issues on iOS - can't preview with $.os.android
+            {
+
+               $.os.useOSThemes=true;
+                if(search=="win8")
+                    $.os.ie=true;
+                $.ui.ready(function(){
+                    $("#afui").get(0).className=search;
+                });
+            }
+            
+            var webRoot = "./";
+            // $.os.android=true;
+            $.ui.autoLaunch = false;
+            $.ui.openLinksNewTab = false;
+            //$.ui.resetScrollers=false;
+            
+
+            $(document).ready(function(){
+                   $.ui.launch();
+
+            });
+            
+            /* This code is used to run as soon as appMobi activates */
+            var onDeviceReady = function () {
+                AppMobi.device.setRotateOrientation("portrait");
+                AppMobi.device.setAutoRotate(false);
+                webRoot = AppMobi.webRoot + "";
+                //hide splash screen
+                // AppMobi.device.hideSplashScreen();
+                $.ui.blockPageScroll(); //block the page from scrolling at the header/footer
+
+            };
+            document.addEventListener("appMobi.device.ready", onDeviceReady, false);
+
+            function showHide(obj, objToHide) {
+                var el = $("#" + objToHide)[0];
+
+                if (obj.className == "expanded") {
+                    obj.className = "collapsed";
+                } else {
+                    obj.className = "expanded";
+                }
+                $(el).toggle();
+
+            }
+
+
+            if($.os.android||$.os.ie||search=="android"){
+                $.ui.ready(function(){
+                    $("#main .list").append("<li><a id='toggleAndroidTheme'>Toggle Theme Color</a></li>");
+                    var $el=$("#afui");
+                    $("#toggleAndroidTheme").bind("click",function(e){
+                        if($el.hasClass("light"))
+                            $el.removeClass("light");
+                        else
+                            $el.addClass("light");
+                    });
+                });
+            }
+        </script>
         <style>
            .samplecode {
                 background: #ccc;
@@ -2099,121 +2210,5 @@ The parent id for this div is "content". Let's verify it.
             </nav>
         </div>
 
-		<!-- uncomment for AppMobi apps <script type="text/javascript" charset="utf-8" src="http://localhost:58888/_appMobi/appmobi.js"></script>
-<script type="text/javascript" charset="utf-8" src="http://localhost:58888/_appMobi/xhr.js"></script>
--->
-        <script type="text/javascript" charset="utf-8" src="./appframework.js"></script>
-        <!-- include af.desktopBrowsers.js on desktop browsers only -->
-        <script>
-
-            function loadedPanel(what) {
-                //We are going to set the badge as the number of li elements inside the target
-                $.ui.updateBadge("#aflink", $("#af").find("li").length);
-            }
-
-
-            function unloadedPanel(what) {
-                console.log("unloaded " + what.id);
-            }
-
-            if (!((window.DocumentTouch && document instanceof DocumentTouch) || 'ontouchstart' in window)) {
-                var script = document.createElement("script");
-                script.src = "plugins/af.desktopBrowsers.js";
-                var tag = $("head").append(script);
-            }
-           
-          
-        </script>
-        <script type="text/javascript" charset="utf-8" src="./plugins/af.actionsheet.js"></script>
-         <script type="text/javascript" charset="utf-8" src="./plugins/af.css3animate.js"></script>
-         <script type="text/javascript" charset="utf-8" src="./plugins/af.passwordBox.js"></script>
-          <script type="text/javascript" charset="utf-8" src="./plugins/af.scroller.js"></script>
-           <script type="text/javascript" charset="utf-8" src="./plugins/af.selectBox.js"></script>
-            <script type="text/javascript" charset="utf-8" src="./plugins/af.touchEvents.js"></script>
-          <script type="text/javascript" charset="utf-8" src="./plugins/af.touchLayer.js"></script>
-        <script type="text/javascript" charset="utf-8" src="./plugins/af.popup.js"></script>
-
-        <script type="text/javascript" charset="utf-8" src="./ui/src/appframework.ui.js"></script>
-        <!-- <script type="text/javascript" charset="utf-8" src="./ui/transitions/all.js"></script> -->
-        <script type="text/javascript" charset="utf-8" src="./ui/transitions/fade.js"></script>
-        <script type="text/javascript" charset="utf-8" src="./ui/transitions/flip.js"></script>
-        <script type="text/javascript" charset="utf-8" src="./ui/transitions/pop.js"></script>
-        <script type="text/javascript" charset="utf-8" src="./ui/transitions/slide.js"></script>
-        <script type="text/javascript" charset="utf-8" src="./ui/transitions/slideDown.js"></script>
-        <script type="text/javascript" charset="utf-8" src="./ui/transitions/slideUp.js"></script>
-        <script type="text/javascript" charset="utf-8" src="./plugins/af.slidemenu.js"></script>
-
-        <script type="text/javascript">
-            /* This function runs once the page is loaded, but appMobi is not yet active */
-            //$.ui.animateHeaders=false;
-             var search=document.location.search.toLowerCase().replace("?","");
-             //if(!search)
-                //$.os.useOSThemes=false;
-                
-            if(search) //Android fix has too many buggy issues on iOS - can't preview with $.os.android
-            {
-
-               $.os.useOSThemes=true;
-                if(search=="win8")
-                    $.os.ie=true;
-                $.ui.ready(function(){
-                    $("#afui").get(0).className=search;
-                });
-            }
-            
-            var webRoot = "./";
-            // $.os.android=true;
-            $.ui.autoLaunch = false;
-            $.ui.openLinksNewTab = false;
-            //$.ui.resetScrollers=false;
-            
-
-            $(document).ready(function(){
-                   //$.ui.launch();
-
-            });
-            
-            /* This code is used to run as soon as appMobi activates */
-            var onDeviceReady = function () {
-                AppMobi.device.setRotateOrientation("portrait");
-                AppMobi.device.setAutoRotate(false);
-                webRoot = AppMobi.webRoot + "";
-                //hide splash screen
-                // AppMobi.device.hideSplashScreen();
-                $.ui.blockPageScroll(); //block the page from scrolling at the header/footer
-
-            };
-            document.addEventListener("appMobi.device.ready", onDeviceReady, false);
-
-            function showHide(obj, objToHide) {
-                var el = $("#" + objToHide)[0];
-
-                if (obj.className == "expanded") {
-                    obj.className = "collapsed";
-                } else {
-                    obj.className = "expanded";
-                }
-                $(el).toggle();
-
-            }
-
-
-            if($.os.android||$.os.ie||search=="android"){
-                $.ui.ready(function(){
-                    $("#main .list").append("<li><a id='toggleAndroidTheme'>Toggle Theme Color</a></li>");
-                    var $el=$("#afui");
-                    $("#toggleAndroidTheme").bind("click",function(e){
-                        if($el.hasClass("light"))
-                            $el.removeClass("light");
-                        else
-                            $el.addClass("light");
-                    });
-                });
-            }
-        </script>
-
-
-
-		<script src="js/app.js"></script>
     </body>
 </html>

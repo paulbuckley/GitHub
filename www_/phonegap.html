@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+
+        <link href="css/af.ui.css" rel="stylesheet" type="text/css"></link>
+		<link href="css/icons.css" rel="stylesheet" type="text/css"></link>
+		<link href="css/custom.css" rel="stylesheet" type="text/css"></link>
+		
+		<script type="text/javascript">
+            /* This function runs once the page is loaded, but appMobi is not yet active */
+            //$.ui.animateHeaders=false;
+             var search=document.location.search.toLowerCase().replace("?","");
+             //if(!search)
+                //$.os.useOSThemes=false;
+                
+            if(search) //Android fix has too many buggy issues on iOS - can't preview with $.os.android
+            {
+
+               $.os.useOSThemes=true;
+                if(search=="win8")
+                    $.os.ie=true;
+                $.ui.ready(function(){
+                    $("#afui").get(0).className=search;
+                });
+            }
+            
+            var webRoot = "./";
+            // $.os.android=true;
+            $.ui.autoLaunch = false;
+            $.ui.openLinksNewTab = false;
+            //$.ui.resetScrollers=false;
+            
+
+            $(document).ready(function(){
+                   $.ui.launch();
+
+            });
+            
+            /* This code is used to run as soon as appMobi activates */
+            var onDeviceReady = function () {
+                AppMobi.device.setRotateOrientation("portrait");
+                AppMobi.device.setAutoRotate(false);
+                webRoot = AppMobi.webRoot + "";
+                //hide splash screen
+                AppMobi.device.hideSplashScreen();
+                $.ui.blockPageScroll(); //block the page from scrolling at the header/footer
+
+            };
+            document.addEventListener("appMobi.device.ready", onDeviceReady, false);
+
+            function showHide(obj, objToHide) {
+                var el = $("#" + objToHide)[0];
+
+                if (obj.className == "expanded") {
+                    obj.className = "collapsed";
+                } else {
+                    obj.className = "expanded";
+                }
+                $(el).toggle();
+
+            }
+
+
+            if($.os.android||$.os.ie||search=="android"){
+                $.ui.ready(function(){
+                    $("#main .list").append("<li><a id='toggleAndroidTheme'>Toggle Theme Color</a></li>");
+                    var $el=$("#afui");
+                    $("#toggleAndroidTheme").bind("click",function(e){
+                        if($el.hasClass("light"))
+                            $el.removeClass("light");
+                        else
+                            $el.addClass("light");
+                    });
+                });
+            }
+        </script>
+
+        <title>MightyDeals</title>
+    </head>
+    <body>
+        <div id="afui" class='af'>
+
+			<div id="header"></div>
+
+			<div id="content" style="">
+
+				<div class="panel" title="Money Expert" data-nav="nav_0" id="page_0" selected="selected" style="" data-appbuilder-object="page">
+					<ul class="list" data-appbuilder-object="list" data-position="static" id="data-list">
+
+					</ul>
+				</div>
+
+			</div>
+
+			<div id="navbar">
+				     <a href="#page_0" class="icon home">Home</a>     
+			</div>
+
+			<header id="header_0" data-appbuilder-object="header">
+				     <a id="backButton" href="#" class="button back" style="visibility: visible; ">Back</a>
+				<h1 id="pageTitle" class="">
+					test
+				</h1>
+
+			</header>
+
+			<nav id="nav_0" data-appbuilder-object="nav">
+				<h1>Side Menu</h1>
+			</nav>
+
+	    </div>
+        <script type="text/javascript" src="cordova.js"></script>
+		<script src="js/lib/appframework.js"></script>
+        <script src="js/lib/appframework.ui.min.js"></script>
+		<script src="js/app.js"></script>
+
+        <!-- <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript">
+            app.initialize();
+        </script> -->
+    </body>
+</html>

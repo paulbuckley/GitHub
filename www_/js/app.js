@@ -7,8 +7,6 @@ var app = function(){
  	function init() {
 	
 		getData();
-		
-		$.ui.launch();
 
     }
 
