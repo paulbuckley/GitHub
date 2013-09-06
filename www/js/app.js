@@ -63,7 +63,7 @@ var app = function(){
 			$.each(data, function(index, data){	
 	               	var html = '';
 					var itemDescription = '<span class="itemDesc">' + data.strDealName + '</span>';
-					html += '<li id="' + data.strDealName + '"><a href="#"><img src="img/products/' + index + '.jpg">' + itemDescription + '</a></li>';
+					html += '<li id="' + data.strDealName + '"><a href="#"><img src="./img/products/' + index + '.jpg">' + itemDescription + '</a></li>';
 	               	// html += '<li id="' + data.strDealName + '"><a href="#"><img src="' + data.strImageListUrl + '">' + itemDescription + '</a></li>';
 	               	$('#data_list').append(html); //Append list to container
 	         });
