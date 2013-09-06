@@ -8,7 +8,7 @@ var app = function(){
 	
 		
 		
-		ui.launch();
+		$.ui.launch();
 		
 		getData();
 
@@ -64,7 +64,7 @@ var app = function(){
 	               	var html = '';
 					var itemDescription = '<span class="itemDesc">' + data.strDealName + '</span>';
 					
-	               	html += '<li id="' + data.strDealName + '"><a href="#" data-ignore="true"><img src="' + data.strImageListUrl + '">' + itemDescription + '</a></li>';
+	               	html += '<li id="' + data.strDealName + '"><a href="#"><img src="' + data.strImageListUrl + '">' + itemDescription + '</a></li>';
 	               	$('#data_list').append(html); //Append list to container
 	         });
 
