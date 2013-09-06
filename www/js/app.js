@@ -54,14 +54,14 @@ var app = function(){
 
 	function loadList(data){
 		
-			$('#data-list').empty();
+			$('#data_list').empty();
 			// Loop through items and create list
 			$.each(data, function(index, data){	
 	               	var html = '';
 					var itemDescription = '<span class="itemDesc">' + data.strDealName + '</span>';
 					
-	               	html += '<li id="' + data.strDealName + '"><a href="#"><img src="' + data.strImageListUrl + '">' + itemDescription + '</a></li>';
-	               	$('#data-list').append(html); //Append list to container
+	               	html += '<li id="' + data.strDealName + '"><a href="#" data-ignore="true"><img src="' + data.strImageListUrl + '">' + itemDescription + '</a></li>';
+	               	$('#data_list').append(html); //Append list to container
 	         });
 
 	}
